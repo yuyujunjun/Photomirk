@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerBrain : MonoBehaviour {
 
     // Use this for initialization
-   [SerializeField] float HP;
+    
+    [SerializeField] float HP;
     [SerializeField] Transform ParallelLight;
     public PlayerBulletManager.bulletstype PhotoOrMirk;
     [SerializeField]bool Inlight;
@@ -14,12 +15,13 @@ public class PlayerBrain : MonoBehaviour {
     float AddAttack;
     [SerializeField] List<Material> T = new List<Material>();
     private float stateQuan = 0;
-    [SerializeField] float transformSpeed = 10;
+    [SerializeField] float transformSpeed ;
     void Start () {
         Inlight = false;
         HP = 100;
         HPLimited = 120;
         AddAttack = 0;
+        transformSpeed = 3f;
         NotificationCenter.DefaultCenter().AddObserver(this,"GetFortune");
         NotificationCenter.DefaultCenter().AddObserver(this, "BrainBeAttacked");
         PhotoOrMirk = PlayerBulletManager.bulletstype.Mirk;
@@ -47,7 +49,12 @@ public class PlayerBrain : MonoBehaviour {
             if (stateQuan >= 1)
             {
                 stateQuan = 1;
+                if (PhotoOrMirk == PlayerBulletManager.bulletstype.Mirk)
+                {
+                    NotificationCenter.DefaultCenter().PostNotification(this, "whenBWChange");
+                }
                 PhotoOrMirk = PlayerBulletManager.bulletstype.Photo;
+                
             }
             
                 for (int i = 0; i < T.Count; i++)
@@ -64,12 +71,19 @@ public class PlayerBrain : MonoBehaviour {
             if (stateQuan <=0)
             {
                 stateQuan = 0;
+                if (PhotoOrMirk == PlayerBulletManager.bulletstype.Photo)
+                {
+                    NotificationCenter.DefaultCenter().PostNotification(this, "whenBWChange");
+                }
                 PhotoOrMirk = PlayerBulletManager.bulletstype.Mirk;
+               
+
             }
            
                 for (int i = 0; i < T.Count; i++)
                 {
                     T[i].SetFloat("_bw", stateQuan);
+                
                 }
             
         }

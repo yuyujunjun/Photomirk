@@ -6,17 +6,20 @@ public class ParticlesManager : MonoBehaviour {
 
     // Use this for initialization
 
-    [SerializeField]ParticleSystem RushingParticles;
+    [SerializeField] ParticleSystem RushingParticles;
     [SerializeField] ParticleSystem Jump1Particles;
     [SerializeField] ParticleSystem Jump2Particles;
     [SerializeField] ParticleSystem PlayerShootingParticles;
     [SerializeField] ParticleSystem HotReactionParticles;//枪械过热
+    [SerializeField] ParticleSystem WhenBWChangeParticles;
     [SerializeField] GameObject HitParticles;
     [SerializeField] GameObject DeadParticles;
     [SerializeField] GameObject HitObstacleParticles;
     [SerializeField] GameObject SlowBulletBoomParticles;
- 
+
+    
     void Start () {
+        
         NotificationCenter.DefaultCenter().AddObserver(this,"RushingP");
         NotificationCenter.DefaultCenter().AddObserver(this, "Jump1P");
         NotificationCenter.DefaultCenter().AddObserver(this, "Jump2P");
@@ -28,12 +31,14 @@ public class ParticlesManager : MonoBehaviour {
         NotificationCenter.DefaultCenter().AddObserver(this, "SlowBulletBoomP");
         NotificationCenter.DefaultCenter().AddObserver(this, "FastBulletFireP");
         NotificationCenter.DefaultCenter().AddObserver(this, "FastBulletNotFireP");
+        NotificationCenter.DefaultCenter().AddObserver(this, "whenBWChange");
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+       
 	}
+   
     void RushingP(Notification notification)
     {
         RushingParticles.Play();
@@ -55,6 +60,7 @@ public class ParticlesManager : MonoBehaviour {
     {
         
         Jump1Particles.Play();
+        
 
     }
     void Jump2P(Notification notification)
@@ -123,5 +129,9 @@ public class ParticlesManager : MonoBehaviour {
         {
             part.Stop();
         }
+    }
+    void whenBWChange()
+    {
+        WhenBWChangeParticles.Play();
     }
 }
