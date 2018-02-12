@@ -15,9 +15,13 @@ using UnityEngine;
         private bool Rushing;
         Rigidbody m_Rigidbody;
     [SerializeField]MeshRenderer[] head;
+    float radius;
+    float height;
         void Start()
         {
             Rushing = false;
+        radius = GetComponent<CapsuleCollider>().radius;
+        height = GetComponent<CapsuleCollider>().height;
             m_Rigidbody = GetComponent<Rigidbody>();
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
@@ -63,8 +67,8 @@ using UnityEngine;
             {
                 Rushing = false;
             //GetComponent<Collider>().isTrigger = false;
-            GetComponent<CapsuleCollider>().radius = 0.3f;
-            GetComponent<CapsuleCollider>().height = 1.4f;
+            GetComponent<CapsuleCollider>().radius = radius;
+            GetComponent<CapsuleCollider>().height = height;
             GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
             foreach (var h in head)
             {
