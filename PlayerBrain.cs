@@ -49,13 +49,12 @@ public class PlayerBrain : MonoBehaviour {
                 stateQuan = 1;
                 PhotoOrMirk = PlayerBulletManager.bulletstype.Photo;
             }
-            else
-            {
+            
                 for (int i = 0; i < T.Count; i++)
                 {
                     T[i].SetFloat("_bw", stateQuan);
                 }
-            }
+            
 
         }
         else
@@ -67,13 +66,12 @@ public class PlayerBrain : MonoBehaviour {
                 stateQuan = 0;
                 PhotoOrMirk = PlayerBulletManager.bulletstype.Mirk;
             }
-            else
-            {
+           
                 for (int i = 0; i < T.Count; i++)
                 {
                     T[i].SetFloat("_bw", stateQuan);
                 }
-            }
+            
         }
         
 	}
