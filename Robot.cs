@@ -296,14 +296,14 @@ public class Robot : MonoBehaviour {
                 if (!m_animator.GetCurrentAnimatorStateInfo(0).IsName("Shooting"))
                 {
                     m_animator.SetTrigger("Shooting");
+                    
+                }
+                if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("Shooting"))
+                {
                     if (FireParticle != null)
                     {
                         NotificationCenter.DefaultCenter().PostNotification(this, "FastBulletFireP", FireParticle);
                     }
-                }
-                if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("Shooting"))
-                {
-                    
                     BulletsInGun -= bullets;
                     //发出bullets发子弹
                     PlayerBulletManager.Bullets tempbullets = new PlayerBulletManager.Bullets();
